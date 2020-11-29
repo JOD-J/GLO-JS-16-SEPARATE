@@ -18,7 +18,7 @@ function userGame () {
 		}
 		let userGuess = prompt( 'Угадай число от 1 до 100' );
 		if (userGuess === null) {
-			alert( 'Игра окончена' );
+			alert( 'конец игры' );
 		} else if (!isNumber(userGuess)) {
 			alert( 'Введи число!' );
 			user();
