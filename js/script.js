@@ -4,45 +4,61 @@ let isNumber = function(n) {
 	return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
-// let numRandom = Math.floor(Math.random(1) * 100);
-// console.log( numRandom );
 
-function userGame (num) {
+
+function userGame () {
 	let attempts = 10;
 	let numRandom = Math.floor(Math.random(1) * 100);
 	console.log( numRandom );
 
-	return function user () {
+	function user () {
+
 		function attemptsExpired () {
-			if () {
-
+			if ( confirm( 'Попытки закончились, хотите попробовать еще раз?' )) {
+				attempts = 10 ; 
+				user();
 			} else {
-
+				alert( 'конец игры' );
 			}
 		}
-
-
 
 		let userGuess = prompt( 'Угадай число от 1 до 100' );
 		if (userGuess === null) {
 			alert( 'Игра окончена' );
+
 		} else if (!isNumber(userGuess)) {
 			alert( 'Введи число!' );
 			user();
-		} else if (num > Number(userGuess)) {
-			alert( 'ваше число ' + userGuess + ' Загаданное число больше, осталось попыток' );
-			user();
-		}	else if (num < Number(userGuess)) {
-			alert( 'ваше число ' + userGuess + ' Загаданное число меньше, осталось попыток' );
-			user();
-		} else if (num === Number(userGuess)) {
-			alert( 'Поздравляю, загаданное число ' + num + ' Вы угадали!!! xотели бы сыграть еще?' );
-		} else if (){
 
-		};
-	};
+		} else if (numRandom > Number(userGuess)) {
+			attempts--;
+			if( attempts === 0 ){
+				attemptsExpired();
+			} else {
+				alert( 'ваше число ' + userGuess + ' Загаданное число больше ' + 'осталось попыток ' + attempts );
+				user();
+			}
+
+		}	else if (numRandom < Number(userGuess)) {
+			attempts--;
+			if( attempts === 0 ){
+				attemptsExpired();
+			} else {
+				alert( 'ваше число ' + userGuess + ' Загаданное число меньше ' + 'осталось попыток ' + attempts  );
+				user();
+			}
+
+		} else if (numRandom === Number(userGuess)) {
+			alert( 'Поздравляю, загаданное число ' + numRandom + ' Вы угадали!!!' );
+			if (confirm('Хотели бы сыграть еще?')) {
+				attempts = 10;
+                userGame();
+			}
+		}
+	}
+	user();
 }
 
-let gameUser = userGame(numRandom);
-gameUser();
+userGame();
+
 
